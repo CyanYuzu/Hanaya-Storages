@@ -59,7 +59,7 @@ permalink: ""
 
 ## 加密与路由
 
-- 加密文章需要设置 `encrypted: true` 并提供非空 `password`；`passwordHint` 是可选提示。
+- 加密文章需要设置 `encrypted: true` 并提供非空 `password`；`passwordHint` 是可选提示。当前实现中，非空 `password` 也会被视为加密内容，因此本例保持为空。
 - `hideHomeContent` 控制加密文章在首页是否隐藏正文摘要。
 - `alias` 与 `permalink` 用于自定义文章路径；自定义 `permalink` 优先级更高。普通文章可不设置。
 - `prev*` / `next*` 是构建时填充的上一篇、下一篇导航数据，只作参考，不应放进有效 frontmatter。
