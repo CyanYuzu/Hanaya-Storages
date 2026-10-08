@@ -1,7 +1,16 @@
 name: Trigger site build
 
-# 当前先手动触发；待代码仓的内容读取与部署工作流、双方凭据就绪后，再启用 push 触发。
+# 只因内容、配置或站点资源变更而触发；修改说明文档不会触发发布。
 on:
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "config/**"
+      - "data/**"
+      - "assets/**"
+      - "public/**"
+      - "shirone.content.json"
   workflow_dispatch: {}
 
 concurrency:
@@ -20,7 +29,7 @@ jobs:
         run: |
           if [ -z "$DISPATCH_TOKEN" ]; then
             echo "configured=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::Set DISPATCH_TOKEN after the code repository is ready."
+            echo "::notice::Set DISPATCH_TOKEN to enable automatic site builds."
           else
             echo "configured=true" >> "$GITHUB_OUTPUT"
           fi
