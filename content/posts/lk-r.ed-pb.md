@@ -1,7 +1,7 @@
 ---
 title: "[无端未授权汉化]立葵老师的琴叶小漫画"
 description: 无端未授权汉化发布
-image: ""
+image: https://img.cyanyuzu.work/images/20260626183123367.webp
 category: Roasting
 published: 2026-06-14
 updated: 2026-09-08
