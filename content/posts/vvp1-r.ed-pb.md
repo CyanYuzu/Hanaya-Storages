@@ -25,9 +25,7 @@ draft: false
 
 **下载**
 
-下载链接:
-
-
+[](@CyanYuzu shared "VVP.zip" from Hanazono: https://opl.cyanyuzu.work/@s/oIajZwnU , the share code is 0425)
 
 提取码: 琴叶姐妹的生日(4位数字)
 
