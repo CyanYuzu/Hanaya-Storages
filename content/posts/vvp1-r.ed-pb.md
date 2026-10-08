@@ -27,7 +27,7 @@ draft: false
 
 [点击下载](https://opl.cyanyuzu.work/@s/oIajZwnU)
 
-提取码: 琴叶姐妹的生日(4位数字)
+分享码: 琴叶姐妹的生日(4位数字)
 
 ---
 
