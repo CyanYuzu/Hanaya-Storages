@@ -1,40 +1,16 @@
 ---
 title: "[无端未授权汉化]VIVID VOICE PARTY 2"
+description: 无端未授权汉化发布
 image: ""
+category: Roasting
 published: 2026-06-27
 updated: 2026-09-08
-description: 无端未授权汉化发布
 tags:
   - vvp
   - 同人志
   - 合同志
   - 长篇
   - ボイロ
-  - roasting
-  - vvp2
-  - 东北切蒲英
-  - 东北俊子
-  - 结月缘
-  - 绁星灯
-  - 足立零
-  - 水奈濑光
-  - 宫舞茉歌
-  - 花隈千冬
-  - 夏色花梨
-  - 小春六花
-  - 弦卷真纪
-  - 佐藤莎莎拉
-  - 铃木梓梓弥
-  - 水奈濑理斗
-  - 琴叶茜
-  - 琴叶葵
-  - 重音teto
-  - 月读爱
-  - 高桥
-  - 小夜
-  - 东北伊太子
-  - 俊达萌
-  - 伊织弓鹤
 draft: false
 ---
 

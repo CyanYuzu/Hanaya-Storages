@@ -1,16 +1,15 @@
 ---
 title: "[无端未授权汉化]立葵老师的琴叶小漫画"
+description: 无端未授权汉化发布
 image: ""
+category: Roasting
 published: 2026-06-14
 updated: 2026-09-08
-description: 无端未授权汉化发布
 tags:
   - ボイロ
   - roasting
   - 立葵
   - 短篇
-  - 琴叶茜
-  - 琴叶葵
 draft: false
 ---
 

@@ -1,27 +1,16 @@
 ---
 title: "[无端未授权汉化]VIVID VOICE PARTY"
+description: 无端未授权汉化发布
 image: ""
+category: Roasting
 published: 2026-06-10
 updated: 2026-09-08
-description: 无端未授权汉化发布
 tags:
   - vvp
   - 同人志
   - 合同志
   - 长篇
   - ボイロ
-  - roasting
-  - 东北切蒲英
-  - 东北俊子
-  - 东北伊太子
-  - 俊达萌
-  - 琴叶茜
-  - 琴叶葵
-  - 结月缘
-  - 绁星灯
-  - 足立零
-  - 小夜
-  - 春日部紬
 draft: false
 ---
 
