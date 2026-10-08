@@ -1,0 +1,15 @@
+# profile.yaml —— 覆盖主题的 src/config/profileConfig.ts
+# 只写想改的键，其余保持主题默认值（主题升级后新默认值会自动生效）。
+avatar: assets/images/demo-avatar.webp
+name: CyanYuzu
+bio: 茶はまだ温かく、春はまだ先。
+links:
+  - name: Bilibili
+    icon: fa6-brands:bilibili
+    url: https://space.bilibili.com/631749766
+  - name: Email
+    icon: fa6-solid:envelope
+    url: mailto:cyanyuzu@qq.com
+  - name: GitHub
+    icon: fa6-brands:github
+    url: https://github.com/CyanYuzu
