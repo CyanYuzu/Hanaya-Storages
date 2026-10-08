@@ -1,10 +1,14 @@
-# About Shirone
+# About Me
 
-Welcome to the demo site of **Shirone** (白音) — an expressive, anime-inspired blog theme built on the **Material 3 Expressive (M3E)** design system.
+数学系本科在读.
 
-::github{repo="LyraVoid/Shirone"}
+喜欢一些音声合成相关, 会自己制作一些相关内容/(无授权, 侵删)搬运一些我觉得有意思的相关内容.
 
-## ✦ Design & Philosophy
+个人对内容的接受度相对较广, 不要在某个主题的内容下跳脸其他主题就好.
+
+---
+
+# About Contents
 
 Shirone aims to combine the warmth of expressive anime aesthetics with the rigor of modern web engineering:
 
