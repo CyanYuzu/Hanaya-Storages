@@ -7,7 +7,6 @@ published: 2026-06-14
 updated: 2026-09-08
 tags:
   - ボイロ
-  - roasting
   - 立葵
   - 短篇
 draft: false
