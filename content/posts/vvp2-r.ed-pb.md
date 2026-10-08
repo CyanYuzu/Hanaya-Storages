@@ -1,7 +1,7 @@
 ---
 title: "[无端未授权汉化]VIVID VOICE PARTY 2"
 description: 无端未授权汉化发布
-image: ""
+image: https://img.cyanyuzu.work/images/20260627173802195.webp
 category: Roasting
 published: 2026-06-27
 updated: 2026-09-08
@@ -25,9 +25,9 @@ draft: false
 
 # 下载
 
-[]()
+[点击下载](https://opl.cyanyuzu.work/@s/kRi01OK3)
 
-提取密码: 缘灯的生日(4位数字)
+分享码: 缘灯的生日(4位数字)
 
 ---
 
