@@ -14,8 +14,8 @@ tags:
 draft: false
 ---
 
-> **注意**
->
+# 注意
+
 > - CyanYuzu个人无端未授权汉化
 > - 请支持原作 **VIVID VOICE PARTY** 及原作者
 > - 仅供学习交流使用 切勿用作商业用途
@@ -23,13 +23,15 @@ draft: false
 
 ---
 
-**下载**
+# 下载
 
 [点击下载](https://opl.cyanyuzu.work/@s/oIajZwnU)
 
 分享码: 琴叶姐妹的生日(4位数字)
 
 ---
+
+# 内容
 
 ## ILLUSTRATIONS
 
