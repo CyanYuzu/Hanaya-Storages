@@ -14,19 +14,18 @@ tags:
 draft: false
 ---
 
-> **注意**
->
+# 注意
+
 > - CyanYuzu个人无端未授权汉化
 > - 请支持原作 **VIVID VOICE PARTY 2** 及原作者
 > - 仅供学习交流使用 切勿用作商业用途
 > - 下载后请在24小时内删除
 
-**下载**
+---
 
-下载链接:
+# 下载
 
-- [InfiniCloud](https://otaru.infini-cloud.net/share/1371a807b776bef9)
-- [123](https://1836055313.share.123pan.cn/123pan/wiLxTd-HU1yh)
+[]()
 
 提取密码: 缘灯的生日(4位数字)
 
