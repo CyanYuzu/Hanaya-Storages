@@ -10,21 +10,20 @@
 
 # About Contents
 
-Shirone aims to combine the warmth of expressive anime aesthetics with the rigor of modern web engineering:
+作为个人博客, 主要分享一些个人汉化, 合成音声制作相关收获, 或自己作为平庸的数学学生的收获等. 此外还可能会有md化的数学教材与讲义.
 
-- **Dynamic Chromatic Spell**: Full dynamic HCT palette generation responding seamlessly to light/dark modes and user preferences with zero layout shifts.
-- **Seamless Shell Navigation**: Persistent application shell driven by Swup for continuous music playback, smooth page transitions, and preserved state.
-- **Rich Story Grimoire**: Markdown and MDX authoring with KaTeX math, Mermaid diagrams, interactive admonitions, expressive code blocks, and adaptive image galleries.
-- **Zero Extra Burden**: Optional integrations (comments, analytics, music widgets) load dynamically on demand — zero DOM footprint and zero bundle overhead when disabled.
+目前正在进行VIVID VOICE PARTY 的烤制.
 
-## ✦ Tech Stack
+声明: 原书著作权归原作者及出版社所有.
 
-- **Framework**: [Astro 7](https://astro.build/) & [Svelte 5](https://svelte.dev/) (Runes-driven islands)
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) & [Stylus](https://stylus-lang.com/)
-- **Design Standard**: [Material 3 Expressive](https://m3.material.io/)
-- **Typography**: Outfit & Yozai (悠哉圆体) with automated build-time subsetting
-- **Search Engine**: [Pagefind](https://pagefind.app/) offline full-text search
+本讲义仅用于个人学习交流, **禁止商业用途**. 如有侵权, 请联系删除.
 
-## ✦ Credits
+---
 
-- **Font**: [Yozai Font (悠哉字体)](https://github.com/lxgw/yozai-font) by [lxgw](https://github.com/lxgw)
+# To Contact Me
+
+不是很喜欢盯着社交账号看.
+
+不过如果有对内容的建议/询问等, 可以联系我的邮箱.
+
+如果有值得回复的信件, 我会留意.
