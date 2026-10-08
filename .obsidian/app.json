@@ -1,0 +1,9 @@
+{
+  "readableLineLength": false,
+  "showLineNumber": true,
+  "attachmentFolderPath": "./atta",
+  "newLinkFormat": "absolute",
+  "alwaysUpdateLinks": true,
+  "trashOption": "local",
+  "showUnsupportedFiles": false
+}

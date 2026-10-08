@@ -1,0 +1,12 @@
+/* OPTIONAL. Page layout and colors only; fonts follow Obsidian defaults. */
+.elegantbook {
+  --file-line-width: 850px;
+  --line-height-normal: 1.65;
+  --h1-color: rgb(var(--eb-structure, 60,113,183));
+  --h2-color: rgb(var(--eb-structure, 60,113,183));
+  --h3-color: rgb(var(--eb-structure, 60,113,183));
+}
+.markdown-preview-view.elegantbook h1 { border-bottom: 1px solid rgb(var(--eb-structure, 60,113,183)); padding-bottom: .35em; }
+@media print {
+  .markdown-preview-view.elegantbook { line-height: 1.55; color: #1a1a1a; }
+}
