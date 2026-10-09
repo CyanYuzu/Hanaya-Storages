@@ -43,8 +43,8 @@ export const compassData: CompassShelf[] = [
 		blurb: "跑在自己服务器上的服务",
 		entries: [
 			{
-				label: "BookLore",
-				href: "https://booklore.cyanyuzu.work",
+				label: "BookOrbit",
+				href: "https://bookorbit.cyanyuzu.work",
 				note: "电子书库",
 				icon: "material-symbols:local-library-outline-rounded",
 			},
