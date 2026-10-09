@@ -1,5 +1,6 @@
 ---
 title: 高等代数(第五版)
+order: -1
 description: 王萼芳, 石生明-高等教育出版社
 image:
 category: Textbook
