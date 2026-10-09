@@ -1,7 +1,7 @@
 ---
-title:
-description: 无端未授权汉化发布
-image: https://img.cyanyuzu.work/images/20260626191555144.webp
+title: 高等代数(第五版)
+description: 王萼芳, 石生明-高等教育出版社
+image:
 category: Roasting
 published: 2026-06-10
 updated: 2026-09-08
