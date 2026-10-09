@@ -22,7 +22,7 @@
 - 代码仓 Secret `CONTENT_REPO_TOKEN`：细粒度令牌只需访问本仓库，权限为 `Contents: read`。
 - 代码仓 Secret `VPS_SSH_KEY`：现有 VPS 发布私钥。
 
-`DISPATCH_TOKEN` 未配置时，触发工作流会安全跳过。代码仓接入私有内容并合并启用前，不会自动部署此仓当前的示例内容。Ghost 旧站文章仍需迁入 `content/` 后再启用生产发布。
+`DISPATCH_TOKEN` 已配置。最近一次手动触发成功完成私有内容检出、编译和 VPS 发布；自动触发已在 `main` 启用，今后符合路径规则的提交会自动发布。
 
 ## 本地预览
 
