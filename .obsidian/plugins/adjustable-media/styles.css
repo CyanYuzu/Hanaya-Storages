@@ -1,0 +1,1255 @@
+.vml-layout {
+  /* The editing frame must not change the columns' available width between modes. */
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  box-sizing: border-box;
+  margin: 0.75em 0;
+  padding: 2px 10px;
+}
+
+.vml-layout--sized {
+  width: var(--vml-block-width);
+}
+
+/*
+ * A layout with text beside its media (docs/DESIGN.md, section 1.1): the media keep the block's width
+ * in a column of their own, and the text columns share what is left.
+ */
+.vml-layout--columns {
+  align-items: flex-start;
+  display: flex;
+  gap: 1.5em;
+}
+
+.vml-layout--columns.vml-layout--sized {
+  width: auto;
+}
+
+/* The text lines up with the media at the top, in the middle or at the bottom. */
+.vml-layout--valign-center {
+  align-items: center;
+}
+
+.vml-layout--valign-bottom {
+  align-items: flex-end;
+}
+
+.vml-layout__media {
+  flex: 0 0 var(--vml-block-width, 40%);
+  min-width: 0;
+  position: relative;
+}
+
+/* A narrow layout that does not float sits in the middle or on the right. */
+.vml-layout.vml-layout--align-center,
+.vml-live-preview:not(.vml-live-preview--wrap) > .vml-layout.vml-layout--align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vml-layout.vml-layout--align-right,
+.vml-live-preview:not(.vml-live-preview--wrap) > .vml-layout.vml-layout--align-right {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* The text of a layout without media flows through columns, balanced as far as they go. */
+.vml-layout--multicol > .vml-layout__text {
+  column-count: var(--vml-cols, 2);
+  column-gap: var(--vml-gap, 2em);
+}
+
+/*
+ * As in LaTeX, a heading stays with the text after it, and a figure, table, equation or caption is not
+ * split between two columns, nor a caption parted from what it describes (markCaptions).
+ */
+.vml-layout--multicol > .vml-layout__text :is(h1, h2, h3, h4, h5, h6) {
+  break-after: avoid;
+}
+
+.vml-layout--multicol > .vml-layout__text :is(.vml-figure, .vml-caption, table, .math-block, pre, .callout) {
+  break-inside: avoid;
+}
+
+.vml-layout--multicol > .vml-layout__text .vml-keep-with-next {
+  break-after: avoid;
+}
+
+/* The text's editor is one column: CodeMirror does not measure text laid out in columns. */
+.vml-layout--multicol > .vml-layout__text--editing {
+  column-count: 1;
+}
+
+.vml-layout--text-center > .vml-layout__text {
+  text-align: center;
+}
+
+.vml-layout--text-right > .vml-layout__text {
+  text-align: right;
+}
+
+.vml-layout--text-justify > .vml-layout__text {
+  text-align: justify;
+}
+
+.vml-layout--text-sized > .vml-layout__text {
+  font-size: calc(var(--vml-text-size, 1) * 1em);
+}
+
+/* Numbered captions and references to them (crossrefView.ts). */
+.vml-caption {
+  font-size: 0.9em;
+}
+
+.vml-caption-label {
+  font-weight: var(--font-semibold);
+}
+
+.vml-ref {
+  color: var(--link-color);
+  cursor: pointer;
+}
+
+.vml-ref:hover {
+  text-decoration: underline;
+}
+
+.vml-ref.is-unresolved {
+  color: var(--text-error);
+  cursor: default;
+  text-decoration: none;
+}
+
+/* A caption drawn as Markdown takes no paragraph spacing. */
+.vml-item__caption--markdown {
+  white-space: normal;
+}
+
+.vml-item__caption--markdown > :first-child {
+  margin-top: 0;
+}
+
+.vml-item__caption--markdown > :last-child {
+  margin-bottom: 0;
+}
+
+/* A blank line between two floating layouts takes no room while the cursor is elsewhere. */
+.markdown-source-view.mod-cm6 .cm-content > .cm-line.vml-float-gap {
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+/* In live preview the editor's pre-wrap would turn the line breaks between Obsidian's elements into blank lines. */
+.vml-layout__text {
+  flex: 1 1 0;
+  margin: 8px 0;
+  min-width: 0;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.vml-layout__text > :first-child {
+  margin-top: 0;
+}
+
+.vml-layout__text > :last-child {
+  margin-bottom: 0;
+}
+
+/* Obsidian removes rule margins in the editor, including rules rendered inside footnotes. */
+.vml-layout .vml-layout__text hr {
+  margin: 2rem 0;
+}
+
+/* Use the same collapsing display-math spacing inside rendered text in both modes. */
+.vml-layout .vml-layout__text mjx-container[display="true"] {
+  margin: 1em 0;
+  padding: 0;
+}
+
+/*
+ * In live preview the text is typed right in the layout: a click swaps it for an editor of its own,
+ * which draws the source in the styles of the note's editor (docs/DESIGN.md, section 4.2).
+ */
+.vml-live-preview .vml-layout__text {
+  cursor: text;
+}
+
+.vml-layout__text > div.vml-text-editor {
+  background: var(--background-primary);
+  border: 1px solid hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.6);
+  border-radius: var(--radius-s);
+  margin: -3px -7px;
+  padding: 2px 6px;
+}
+
+.vml-layout__text > div.vml-text-editor:focus-within {
+  border-color: var(--interactive-accent);
+  box-shadow: 0 0 0 2px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.2);
+}
+
+.vml-layout__text > div.vml-text-editor.is-invalid {
+  border-color: var(--text-error);
+}
+
+/* The column's editor sits inside the note's editor, but takes none of its file margins, code font or focus outline. */
+.vml-text-editor .cm-editor.cm-focused {
+  outline: none;
+}
+
+.vml-text-editor .cm-editor .cm-scroller {
+  font-family: inherit;
+  line-height: inherit;
+  overflow: visible;
+  padding: 0;
+}
+
+.vml-text-editor .cm-editor .cm-content {
+  padding: 0;
+}
+
+/* As in the drawn column, the first line starts right at the top, a heading's spacing aside. */
+.vml-text-editor .cm-editor .cm-content > .cm-line:first-child {
+  padding-top: 0;
+}
+
+/* Away from the cursor, a blank line takes the room of a paragraph break, as in the drawn column. */
+.vml-text-editor .cm-editor .cm-content > .cm-line.vml-blank-line {
+  line-height: var(--p-spacing, 1rem);
+}
+
+/* The rows of a wrapped list item, task or quote after its first go on under its text, as in live preview. */
+.vml-text-editor .cm-editor .cm-content > .cm-line.vml-hanging {
+  padding-inline-start: var(--vml-hanging);
+  text-indent: calc(-1 * var(--vml-hanging));
+}
+
+.vml-text-editor .cm-editor .cm-content > .cm-line.vml-hanging > * {
+  text-indent: 0;
+}
+
+.vml-text-editor .image-embed img {
+  max-width: 100%;
+}
+
+/* Link suggestions for a text column's editor, under its cursor; Obsidian's styles draw the popup. */
+.suggestion-container.vml-link-suggest {
+  left: var(--vml-suggest-left, 0);
+  top: var(--vml-suggest-top, 0);
+}
+
+.vml-text-editor__note {
+  color: var(--text-error);
+  display: none;
+  font-size: var(--font-ui-smaller);
+  margin-top: 6px;
+}
+
+.vml-text-editor.is-invalid + .vml-text-editor__note {
+  display: block;
+}
+
+.vml-live-preview {
+  position: relative;
+}
+
+/*
+ * CodeMirror measures a widget by its box and ignores margins, so a layout's spacing is padding of
+ * its widget. As a margin it could reach out of a widget whose painting is not contained
+ * (see .vml-has-wraps below), and every line after it would be placed too high.
+ */
+.vml-live-preview:not(.vml-live-preview--wrap) {
+  padding: 0.75em 0;
+}
+
+.vml-live-preview:not(.vml-live-preview--wrap) > .vml-layout {
+  margin: 0;
+}
+
+/* In live preview a glowing frame shows where a layout begins and ends; its edges resize it. */
+.vml-live-preview .vml-layout {
+  border: 1.5px solid hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.7);
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 3px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.1),
+    0 0 14px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.3);
+  box-sizing: border-box;
+  padding: 2px 10px;
+  position: relative;
+  transition: border-color 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+}
+
+.vml-live-preview .vml-layout:hover,
+.vml-live-preview .vml-layout--resizing {
+  border-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.9);
+  box-shadow:
+    0 0 0 3px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.14),
+    0 0 18px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.4);
+}
+
+.vml-live-preview .vml-layout--readonly {
+  border: 1.5px dashed var(--background-modifier-border);
+  box-shadow: none;
+}
+
+.vml-live-preview .vml-layout.vml-layout--drop-target {
+  background-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.06);
+  border-color: var(--interactive-accent);
+  box-shadow:
+    0 0 0 4px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.25),
+    0 0 24px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.55);
+}
+
+.vml-layout__warning {
+  color: var(--text-warning);
+  font-size: var(--font-ui-smaller);
+  margin-bottom: 4px;
+}
+
+.vml-row {
+  align-items: flex-start;
+  display: flex;
+  gap: 8px;
+  margin: 8px 0;
+  position: relative;
+}
+
+/* A single item sits between two spacers that share the free space in the ratio of its position. */
+.vml-row--single {
+  gap: 0;
+}
+
+.vml-row__spacer {
+  flex: var(--vml-offset, 0.5) 1 0;
+  min-width: 0;
+}
+
+.vml-row__spacer--after {
+  flex-grow: calc(1 - var(--vml-offset, 0.5));
+}
+
+.vml-item {
+  flex: var(--vml-grow, 1) 1 0;
+  min-width: 0;
+  position: relative;
+}
+
+.vml-row--single .vml-item {
+  flex: 0 1 auto;
+  max-width: 100%;
+}
+
+.vml-item--sized {
+  width: var(--vml-item-width);
+}
+
+.vml-item__media {
+  background: var(--background-secondary);
+  border-radius: var(--radius-s);
+  display: block;
+  height: var(--vml-row-height);
+  /* Default and manual column widths use the same fit, so the first drag never changes image scale abruptly. */
+  object-fit: contain;
+  width: 100%;
+}
+
+.vml-row--single .vml-item__media {
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  width: var(--vml-natural-width, auto);
+}
+
+.vml-row--single .vml-item--sized .vml-item__media {
+  width: 100%;
+}
+
+.vml-item__missing {
+  align-items: center;
+  border: 1px dashed var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  color: var(--text-muted);
+  display: flex;
+  font-size: var(--font-ui-small);
+  height: var(--vml-row-height);
+  justify-content: center;
+  padding: 8px;
+  text-align: center;
+}
+
+.vml-item__caption {
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.vml-item__caption[data-align="center"] {
+  text-align: center;
+}
+
+.vml-edit-source {
+  opacity: 0;
+  position: absolute;
+  right: 16px;
+  top: 8px;
+  transition: opacity 120ms ease;
+  z-index: 3;
+}
+
+.vml-live-preview:hover .vml-edit-source,
+.vml-edit-source:focus-visible {
+  opacity: 1;
+}
+
+/* Interactions */
+
+.vml-layout--interactive .vml-item {
+  cursor: grab;
+}
+
+/* Videos move by their grip; the video itself keeps its own controls. */
+.vml-layout--interactive .vml-item--video {
+  cursor: auto;
+}
+
+/* Images outside the layouts of a note can be dragged into them. */
+.vml-has-layouts .cm-content .image-embed > .image-wrapper > img {
+  cursor: grab;
+}
+
+.vml-layout--dragging,
+.vml-layout--dragging .vml-item,
+body.vml-is-dragging,
+body.vml-is-dragging * {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.vml-layout--interactive .vml-item:focus-visible {
+  outline: 2px solid var(--interactive-accent);
+  outline-offset: 2px;
+}
+
+.vml-item--dragging,
+.vml-plain-image--dragging {
+  opacity: 0.5;
+}
+
+.vml-row--positioning {
+  border-radius: var(--radius-s);
+  outline: 1px dashed hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.6);
+  outline-offset: 3px;
+}
+
+.vml-row--snapped .vml-item {
+  border-radius: var(--radius-s);
+  outline: 2px solid var(--interactive-accent);
+  outline-offset: 2px;
+}
+
+.vml-drag-ghost {
+  align-items: center;
+  background: var(--background-primary);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-l);
+  display: flex;
+  justify-content: center;
+  left: 0;
+  min-height: 48px;
+  opacity: 0.9;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transform: translate(calc(var(--vml-ghost-x, 0px) + 14px), calc(var(--vml-ghost-y, 0px) + 14px));
+  width: 96px;
+  z-index: var(--layer-dragged-item, 80);
+}
+
+.vml-drag-ghost.is-hidden {
+  display: none;
+}
+
+.vml-drag-ghost img {
+  display: block;
+  max-height: 96px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.vml-drop-before::before,
+.vml-drop-after::after {
+  background: var(--interactive-accent);
+  border-radius: 2px;
+  bottom: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 3px;
+  z-index: 3;
+}
+
+.vml-drop-before::before {
+  left: -6px;
+}
+
+.vml-drop-after::after {
+  right: -6px;
+}
+
+.vml-drop-row-before::before,
+.vml-drop-row-after::after {
+  background: var(--interactive-accent);
+  border-radius: 2px;
+  content: "";
+  height: 3px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 3;
+}
+
+.vml-drop-row-before::before {
+  top: -6px;
+}
+
+.vml-drop-row-after::after {
+  bottom: -6px;
+}
+
+.vml-handle {
+  opacity: 0;
+  position: absolute;
+  touch-action: none;
+  transition: opacity 120ms ease;
+  z-index: 2;
+}
+
+.vml-layout--interactive .vml-row:hover .vml-handle,
+.vml-layout--interactive .vml-item:focus-within .vml-handle,
+.vml-live-preview .vml-layout--interactive:hover > .vml-frame__handle,
+.vml-live-preview .vml-layout--interactive:hover > .vml-layout__media > .vml-frame__handle,
+.vml-live-preview .vml-layout--interactive:hover > .vml-frame__move,
+.vml-handle.is-active {
+  opacity: 1;
+}
+
+.vml-row__height-handle {
+  bottom: -7px;
+  cursor: ns-resize;
+  height: 10px;
+  left: 0;
+  right: 0;
+}
+
+.vml-row__height-handle::after {
+  background: var(--interactive-accent);
+  border-radius: 1px;
+  content: "";
+  height: 2px;
+  left: 40%;
+  position: absolute;
+  right: 40%;
+  top: 4px;
+}
+
+.vml-item__col-handle {
+  bottom: 0;
+  cursor: col-resize;
+  right: -8px;
+  top: 0;
+  width: 8px;
+}
+
+.vml-item__col-handle::after {
+  background: var(--interactive-accent);
+  border-radius: 1px;
+  bottom: 20%;
+  content: "";
+  left: 3px;
+  position: absolute;
+  top: 20%;
+  width: 2px;
+}
+
+.vml-item__width-handle {
+  background: linear-gradient(135deg, transparent 50%, var(--interactive-accent) 50%);
+  border-radius: 2px;
+  bottom: 4px;
+  cursor: nwse-resize;
+  height: 14px;
+  right: 4px;
+  width: 14px;
+}
+
+.vml-item__width-handle--left {
+  background: linear-gradient(225deg, transparent 50%, var(--interactive-accent) 50%);
+  cursor: nesw-resize;
+  left: 4px;
+  right: auto;
+}
+
+.vml-item__grip {
+  align-items: center;
+  background: var(--background-primary);
+  border-radius: var(--radius-s);
+  cursor: grab;
+  display: flex;
+  height: 24px;
+  justify-content: center;
+  left: 4px;
+  top: 4px;
+  width: 24px;
+}
+
+/*
+ * The frame's handles sit on its right edge, bottom edge and bottom-right corner; with text beside the
+ * media, on those of the media's column.
+ */
+.vml-frame__handle {
+  z-index: 4;
+}
+
+.vml-frame__handle::after {
+  background: var(--interactive-accent);
+  border-radius: 3px;
+  box-shadow: 0 0 6px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.6);
+  content: "";
+  position: absolute;
+}
+
+.vml-frame__handle--right {
+  bottom: 18px;
+  cursor: ew-resize;
+  right: -7px;
+  top: 18px;
+  width: 12px;
+}
+
+.vml-frame__handle--right::after {
+  height: 36px;
+  left: 4px;
+  top: calc(50% - 18px);
+  width: 4px;
+}
+
+.vml-frame__handle--bottom {
+  bottom: -7px;
+  cursor: ns-resize;
+  height: 12px;
+  left: 18px;
+  right: 18px;
+}
+
+.vml-frame__handle--bottom::after {
+  height: 4px;
+  left: calc(50% - 18px);
+  top: 4px;
+  width: 36px;
+}
+
+.vml-frame__handle--corner {
+  bottom: -8px;
+  cursor: nwse-resize;
+  height: 16px;
+  right: -8px;
+  width: 16px;
+}
+
+.vml-frame__handle--corner::after {
+  border: 2px solid var(--background-primary);
+  border-radius: 50%;
+  height: 12px;
+  left: 0;
+  top: 0;
+  width: 12px;
+}
+
+/* A layout floating right grows to the left: its width handles sit on its left edge. */
+.vml-frame__handle--right.vml-frame__handle--mirrored {
+  left: -7px;
+  right: auto;
+}
+
+.vml-frame__handle--corner.vml-frame__handle--mirrored {
+  cursor: nesw-resize;
+  left: -8px;
+  right: auto;
+}
+
+/* The grip on top of the frame moves the whole layout. */
+.vml-frame__move {
+  align-items: center;
+  background: var(--interactive-accent);
+  border-radius: var(--radius-l);
+  box-shadow: 0 0 6px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.6);
+  color: var(--text-on-accent);
+  cursor: grab;
+  display: flex;
+  height: 14px;
+  justify-content: center;
+  left: calc(50% - 20px);
+  top: -8px;
+  width: 40px;
+  z-index: 4;
+}
+
+.vml-frame__move svg {
+  height: 14px;
+  width: 14px;
+}
+
+.vml-layout--moving {
+  opacity: 0.4;
+}
+
+/* Where a moved layout will go: its outline beside the text, or a line between two paragraphs. */
+.vml-block-drop {
+  background-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.08);
+  border: 2px dashed var(--interactive-accent);
+  border-radius: var(--radius-m);
+  box-sizing: border-box;
+  height: var(--vml-drop-height, 0);
+  left: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transform: translate(var(--vml-drop-x, 0), var(--vml-drop-y, 0));
+  width: var(--vml-drop-width, 0);
+  z-index: var(--layer-dragged-item, 80);
+}
+
+.vml-block-drop--line {
+  background-color: var(--interactive-accent);
+  border: none;
+  border-radius: 2px;
+  height: 3px;
+}
+
+.vml-block-drop.is-hidden {
+  display: none;
+}
+
+.vml-block-drop__label {
+  background: var(--interactive-accent);
+  border-radius: var(--radius-s);
+  color: var(--text-on-accent);
+  font-size: var(--font-ui-smaller);
+  left: 6px;
+  padding: 1px 6px;
+  position: absolute;
+  top: 6px;
+  white-space: nowrap;
+}
+
+.vml-block-drop--line .vml-block-drop__label {
+  top: -22px;
+}
+
+/*
+ * Text wrapping (docs/DESIGN.md, section 4). A wrapped layout floats beside the note's own text; one
+ * that starts further down floats below an empty, zero-width float as high as the lines it skips.
+ */
+.vml-layout--wrap-left {
+  clear: left;
+  float: left;
+  margin: 0.25em 1.5em 0.5em 0;
+}
+
+.vml-layout--wrap-right {
+  clear: right;
+  float: right;
+  margin: 0.25em 0 0.5em 1.5em;
+}
+
+.vml-wrap-skip {
+  height: calc(var(--vml-skip, 0) * 1lh);
+  width: 0;
+}
+
+.vml-wrap-skip--left {
+  float: left;
+}
+
+.vml-wrap-skip--right {
+  float: right;
+}
+
+/*
+ * Reading view: every section beside a wrapped layout holds a hidden stand-in for the float. A
+ * section's stand-ins show when the section right before it in the page is neither the layout's section
+ * nor another section with a stand-in. Its box generates nothing itself, so margins still collapse.
+ */
+.vml-rv-proxy {
+  display: none;
+}
+
+.vml-rv-table-scroll {
+  overflow-x: auto;
+}
+
+.markdown-preview-sizer > .vml-rv-host:not(.vml-rv-anchor + .vml-rv-host, .vml-rv-host + .vml-rv-host) > .vml-rv-proxy {
+  display: contents;
+}
+
+/* A copy of a layout is measured in the page, where it takes no room. */
+.markdown-preview-sizer > .vml-rv-measure {
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Reading view: a layout that does not wrap starts below the floats before it. */
+.markdown-rendered .vml-layout:not(.vml-layout--wrap) {
+  clear: both;
+}
+
+/*
+ * Reading view, in a note with a wrapped layout (its sections carry vml-rv-wrapping): lists (so nested
+ * ones keep their indent), a quote's bar, a callout's box, a rule and display math sit beside a float
+ * as a whole.
+ */
+.markdown-rendered .vml-rv-wrapping :is(ul, ol, blockquote, .callout, hr, .math-block):not(.vml-layout *) {
+  display: flow-root;
+}
+
+/*
+ * Live preview. A wrapped layout's widget is a zero-height anchor the layout floats out of. Obsidian
+ * contains the painting of every block widget, which would keep the float inside.
+ */
+.markdown-source-view.mod-cm6 .cm-content > .vml-live-preview--wrap[contenteditable="false"] {
+  contain: none !important;
+}
+
+/* The editor's lines are positioned, so they would paint and take clicks above a plain float. */
+.vml-live-preview .vml-layout--wrap {
+  z-index: 1;
+}
+
+/* In a note with wrapped layouts no line clears floats: headings wrap too. */
+.vml-has-wraps .cm-content > .cm-line {
+  clear: none;
+}
+
+/*
+ * Obsidian measures the hanging indent of lists and quotes from the content's edge, which beside a
+ * float lies under the float. Laid out on their own, such lines sit beside the float as a whole and
+ * are measured from their own edge; code and rules draw their background beside it too.
+ */
+.vml-has-wraps .cm-content > .cm-line:is(.HyperMD-list-line, .HyperMD-quote, .HyperMD-hr, [style*="text-indent"]) {
+  display: flow-root;
+}
+
+/* A fenced code block is one unit in reading/print view, not independently wrapping lines. */
+.vml-has-wraps .cm-content > .cm-line.HyperMD-codeblock-begin,
+.markdown-rendered .vml-rv-wrapping pre,
+.vml-print-content pre {
+  clear: both;
+}
+
+.vml-has-wraps .cm-content > .cm-line.HyperMD-codeblock {
+  display: block;
+}
+
+.vml-print-content :is(ul, ol, blockquote, .callout, hr, .math-block):not(.vml-layout *) {
+  display: flow-root;
+}
+
+.vml-print-content {
+  display: flow-root;
+}
+
+@media print {
+  .vml-layout {
+    break-inside: avoid;
+  }
+
+  /* Long text layouts must continue on the next page instead of reserving a whole page. */
+  .vml-layout--text-only:not(.vml-layout--wrap) {
+    break-inside: auto;
+  }
+
+  /* Screen tables can scroll horizontally; every column must fit on paper. */
+  .vml-print-content table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .vml-print-content :is(th, td) {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .vml-print-content table:has(tr > :nth-child(9)) {
+    font-size: 0.75em;
+    table-layout: auto;
+  }
+
+  .vml-print-content table:has(tr > :nth-child(9)) :is(th, td) {
+    font-size: inherit;
+    padding: 0.2em;
+  }
+
+  .vml-print-content table:has(tr > :nth-child(9)) :is(th, td):first-child {
+    overflow-wrap: normal;
+  }
+}
+
+/*
+ * A layout that does not wrap starts below the floats before it. The clearance stays inside its
+ * widget, whose height CodeMirror measures, so the widget's painting cannot be contained either.
+ */
+.vml-has-wraps .cm-content > .vml-live-preview:not(.vml-live-preview--wrap)[contenteditable="false"] {
+  contain: none !important;
+}
+
+.vml-has-wraps .vml-live-preview:not(.vml-live-preview--wrap) > .vml-layout {
+  clear: both;
+}
+
+/*
+ * While the source of a layout shows, the media Obsidian draws in it are thumbnails: the note barely
+ * moves. The selector outranks Obsidian's own width for editor images
+ * (`.cm-content .image-embed .image-wrapper img:not([width])`).
+ */
+.markdown-source-view.mod-cm6 .cm-content > .cm-line.vml-source-line .image-embed img,
+.markdown-source-view.mod-cm6 .cm-content > .cm-line.vml-source-line .internal-embed video {
+  height: auto;
+  max-height: 4.5em;
+  max-width: 12em;
+  object-fit: contain;
+  width: auto;
+}
+
+/* A spacer in front of an element pushed below a float, so CodeMirror measures the push. */
+.vml-wrap-gap {
+  height: var(--vml-gap-height, 0);
+}
+
+/* Stand-in for a float whose anchor lies above the part of the note the editor has drawn. */
+.vml-wrap-proxy__sandbag {
+  height: var(--vml-proxy-sandbag, 0);
+  width: 0;
+}
+
+.vml-wrap-proxy__sandbag--left {
+  float: left;
+}
+
+.vml-wrap-proxy__sandbag--right {
+  float: right;
+}
+
+.vml-wrap-proxy__float {
+  height: var(--vml-proxy-height, 0);
+  overflow: hidden;
+  position: relative;
+  width: var(--vml-proxy-width, 0);
+  z-index: 1;
+}
+
+.vml-wrap-proxy__float--left {
+  clear: left;
+  float: left;
+  margin-right: var(--vml-proxy-margin, 0);
+}
+
+.vml-wrap-proxy__float--right {
+  clear: right;
+  float: right;
+  margin-left: var(--vml-proxy-margin, 0);
+}
+
+.vml-wrap-proxy__content {
+  margin-top: calc(-1 * var(--vml-proxy-shift, 0px));
+}
+
+/* A stand-in shows the layout itself, or a copy of it, at the float's width. */
+.vml-wrap-proxy__content > .vml-layout {
+  float: none;
+  margin: 0;
+  width: 100%;
+}
+
+/* Image viewer */
+
+.vml-viewer-container .modal-bg {
+  background-color: rgb(0 0 0 / 0.88);
+}
+
+.modal.vml-viewer {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  height: 100vh;
+  max-height: none;
+  max-width: none;
+  padding: 0;
+  width: 100vw;
+}
+
+.vml-viewer .modal-content {
+  height: 100%;
+}
+
+.vml-viewer .modal-close-button {
+  display: none;
+}
+
+.vml-viewer__close {
+  background: rgb(0 0 0 / 0.5);
+  border-radius: 50%;
+  color: white;
+  height: 36px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 36px;
+  z-index: 1;
+}
+
+.vml-viewer__close:hover {
+  background: rgb(0 0 0 / 0.75);
+  color: white;
+}
+
+.vml-viewer__stage {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.vml-viewer__image {
+  cursor: zoom-in;
+  max-height: 92vh;
+  max-width: 92vw;
+  object-fit: contain;
+  transform: translate(var(--vml-pan-x, 0px), var(--vml-pan-y, 0px)) scale(var(--vml-zoom, 1));
+  transition: transform 120ms ease;
+  user-select: none;
+}
+
+.vml-viewer__image.is-zoomed {
+  cursor: grab;
+}
+
+.vml-viewer__image.is-panning {
+  cursor: grabbing;
+  transition: none;
+}
+
+.vml-viewer__counter {
+  background: rgb(0 0 0 / 0.5);
+  border-radius: var(--radius-m);
+  bottom: 16px;
+  color: white;
+  font-size: var(--font-ui-small);
+  left: 50%;
+  padding: 2px 10px;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+/* Dialogs */
+
+.vml-caption-modal__text {
+  resize: vertical;
+  width: 100%;
+}
+
+.vml-caption-modal__align {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.vml-caption-modal__align button.is-active {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+.vml-remove-list {
+  margin: 8px 0;
+  max-height: 320px;
+  overflow-y: auto;
+  padding-left: 1.2em;
+}
+
+/* Override Obsidian's inline table scroller while a float shares the section. */
+.vml-rv-table-host {
+  overflow-x: visible !important;
+}
+/* Feature overview and onboarding modal */
+.modal.vml-guide-modal {
+  width: min(840px, 94vw);
+  max-height: 88vh;
+  padding: 24px 28px;
+}
+
+.vml-guide__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.vml-guide__title {
+  margin: 0 0 6px 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-normal);
+}
+
+.vml-guide__subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.vml-guide__lang-select {
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.vml-guide__section-title {
+  margin: 16px 0 10px 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.vml-guide__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.vml-guide__card {
+  padding: 14px 16px;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.vml-guide__card:hover {
+  border-color: var(--interactive-accent);
+}
+
+.vml-guide__card-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-normal);
+}
+
+.vml-guide__card-desc {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.vml-guide__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 12px 16px;
+  background-color: var(--background-secondary-alt);
+  border-radius: var(--radius-m);
+}
+
+.vml-guide__step-item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.vml-guide__step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.vml-guide__step-title {
+  color: var(--text-normal);
+}
+
+.vml-guide__step-desc {
+  color: var(--text-muted);
+}
+
+.vml-guide__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.vml-guide__create-btn {
+  padding: 6px 16px;
+}
+
+.vml-guide__start-btn {
+  padding: 6px 18px;
+}
+
+.vml-update-modal {
+  width: 620px;
+  max-width: 90vw;
+}
+
+.vml-update__body h3 {
+  margin-top: 24px;
+}
+
+/* Preserve the transparent frame's geometry and hover handles when normal highlighting is off. */
+.vml-cursor-highlights .vml-live-preview:not(.vml-cursor-in-block) .vml-layout:not(:hover):not(.vml-layout--drop-target) {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.vml-cursor-highlights .vml-cursor-in-block .vml-layout {
+  border-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.7);
+  box-shadow:
+    0 0 0 3px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.1),
+    0 0 14px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.3);
+}
+
+/* Source expansion keeps its existing widgets; the actual source range gets an inset guide. */
+.markdown-source-view.mod-cm6 .cm-content > .cm-line.vml-source-line--active {
+  box-shadow: inset 2px 0 var(--interactive-accent);
+  background-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.06);
+}
