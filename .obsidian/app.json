@@ -4,5 +4,6 @@
   "attachmentFolderPath": "./atta",
   "newLinkFormat": "absolute",
   "alwaysUpdateLinks": true,
-  "trashOption": "local"
+  "trashOption": "local",
+  "showUnsupportedFiles": false
 }
