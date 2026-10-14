@@ -1,3 +1,18 @@
 node_modules/
 .DS_Store
 Thumbs.db
+
+# Track portable Obsidian configuration, plugin code, snippets and templates.
+!/.obsidian/
+!/.obsidian/**
+!/Templates/
+!/Templates/**
+# Device state and FNSync credentials are local; never commit access tokens.
+/.obsidian/workspace.json
+/.obsidian/workspace-mobile.json
+/.obsidian/cache/
+/.obsidian/plugins/fast-note-sync/data.json
+/.obsidian/plugins/fast-note-sync/configHashMap.json
+/.obsidian/plugins/fast-note-sync/fileHashMap.json
+/.obsidian/plugins/fast-note-sync/folderSnapshot.json
+/.obsidian/plugins/fast-note-sync/syncHashMap.json
