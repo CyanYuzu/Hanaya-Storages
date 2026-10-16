@@ -1,4 +1,2 @@
 # Materialize through the existing Shirone content configuration compiler.
 enable: true
-imageOrigins:
-  - https://roaster.cyanyuzu.work
