@@ -1,9 +1,6 @@
 {
   "accentColor": "",
-  "enabledCssSnippets": [
-    "elegantbook-blocks",
-    "elegantbook-page"
-  ],
+  "enabledCssSnippets": [],
   "baseFontSizeAction": true,
   "nativeMenus": true
 }

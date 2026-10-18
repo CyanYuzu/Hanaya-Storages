@@ -35,6 +35,6 @@ pnpm.cmd dev
 ```
 
 当前 `content/posts/` 已包含 3 篇 Ghost 迁移稿。
-VIVID VOICE PARTY 两辑各合并为单篇；立葵合集整理为 34 个小篇，重复的 6 篇单篇配文已并入对应段落。数学讲义未迁移。
+VIVID VOICE PARTY 两辑各合并为单篇；立葵合集整理为 34 个小篇，重复的 6 篇单篇配文已并入对应段落。
 
 封面图字段留空，正文图片保留 `img.cyanyuzu.work` 外链；Ghost 原站数据没有删除。
